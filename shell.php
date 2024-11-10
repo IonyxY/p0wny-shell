@@ -1,8 +1,8 @@
 <?php
 
 $SHELL_CONFIG = array(
-    'username' => 'p0wny',
-    'hostname' => 'shell',
+    'username' => 'gemece',
+    'hostname' => 'core14.spatiul.ro',
 );
 
 function expandPath($path) {
