@@ -178,9 +178,7 @@ if (isset($_GET["feature"])) {
     initShellConfig();
 }
 
-?>
-
-<!DOCTYPE html>
+?><!DOCTYPE html>
 <html>
 
     <head>
