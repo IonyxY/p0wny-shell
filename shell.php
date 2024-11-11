@@ -142,7 +142,7 @@ function initShellConfig() {
     if (isRunningWindows()) {
         $SHELL_CONFIG['username'] = getenv('USERNAME') ?: 'unknown_user';
     } else {
-        $SHELL_CONFIG['username'] = getenv('USER') ?: 'unknown_user';
+        $SHELL_CONFIG['username'] = 'gemece';
     }
 
     // Set the hostname if available
